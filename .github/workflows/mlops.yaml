@@ -1,0 +1,24 @@
+name: MLOps training
+on:
+  push:
+    branches:
+      - master-na
+  pull_request:
+    branches:
+      - master-na
+jobs: 
+  Explore-GitHub-Actions:
+    runs-on: [self-hosted, local-linux]
+    steps:
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.30.0
+        inlineScript: |
+          az account show
